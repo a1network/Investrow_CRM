@@ -1,0 +1,111 @@
+/* General Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Scrollable Containers */
+.scroller-admin,
+.scroller-leads,
+.table-container-assigned {
+  overflow: auto;
+  border-radius: 5px;
+}
+
+/* Responsive Table Container */
+.table-container-assigned {
+  height: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Responsive Scrollbars */
+.scroller-admin {
+  height: 250px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Sticky Table Header */
+.table-head tr th {
+  position: sticky;
+  top: 0;
+  background-color: #00B050;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  border-bottom: 2px solid #333232;
+  z-index: 2;
+}
+
+/* Avoid Table Header Jumping */
+.table {
+  border-collapse: collapse;
+}
+
+/* Table Border Styling */
+.th {
+  box-shadow: 0px 0px 0 2px #e8e8e8;
+}
+
+/* Text Styling */
+.test {
+  color: #d1008b;
+}
+
+.admin-edit {
+  cursor: pointer;
+  color: blue;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 1024px) {
+  .table-container-assigned {
+    height: 350px;
+  }
+  .table-head tr th {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+/* Mobile Screens */
+@media screen and (max-width: 768px) {
+  .table-container-assigned {
+    height: auto;
+    max-height: 300px;
+    overflow-x: auto;
+    overflow-y: scroll;
+  }
+  
+  .scroller-admin,
+  .scroller-leads {
+    height: auto;
+    max-height: 250px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  .table-head tr th {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
+
+/* Small Mobile Screens */
+@media screen and (max-width: 480px) {
+  .table-head tr th {
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  table {
+    font-size: 10px;
+  }
+
+  .admin-edit {
+    font-size: 12px;
+  }
+}

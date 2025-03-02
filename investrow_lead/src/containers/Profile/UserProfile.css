@@ -1,0 +1,118 @@
+/* User Profile CSS */
+.profile-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    height: 93vh;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+  }
+  
+  .profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .profile-image {
+    margin-right: 30px;
+  }
+  
+  .profile-img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid #4db8ff;
+    object-fit: cover;
+  }
+  
+  .profile-info {
+    flex: 1;
+  }
+  
+  .profile-info h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .profile-info p {
+    font-size: 1.1rem;
+    color: #777;
+    margin-bottom: 6px;
+  }
+  
+  .profile-info .email,
+  .profile-info .mobile {
+    font-size: 1rem;
+  }
+  
+  .profile-info .role {
+    font-weight: bold;
+    color: #4db8ff;
+  }
+  
+  /* Stats Section */
+  .profile-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    max-height: 95px;
+  }
+  
+  .stat-card {
+    background: #f9f9f9;
+    padding: 2px;
+    width: 30%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .stat-card h4 {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Graph Section */
+  .graph {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+  }
+  
+  .graph h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    color: #333;
+  }
+  
+  /* Styling for the doughnut graph */
+  .graph .chartjs-render-monitor {
+    display: block !important;
+    margin: 0 auto;
+  }
+  

@@ -1,0 +1,97 @@
+/* Admin Profile CSS */
+.profile-container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 30px;
+  }
+  
+  /* Admin Details Section */
+  .admin-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+  }
+  
+  .admin-card {
+    background: #f9f9f9;
+    padding: 20px;
+    width: 22%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .admin-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .admin-card h4 {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .admin-card p {
+    font-size: 1.3rem;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  /* Total Leads Section */
+  .total-leads {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background: #f9f9f9;
+    padding: 20px;
+    width: 40%;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .stat-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .stat-card h4 {
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .stat-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Graph Section */
+  .graph {
+    width: 100%;
+    height: 400px;
+  }
+  
+  .graph h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    color: #333;
+  }
+  

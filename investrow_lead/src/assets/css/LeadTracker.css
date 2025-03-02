@@ -1,0 +1,52 @@
+/* Stage - Done */
+.stage-done {
+  background-color: #00B050;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* Stage - Disqualified */
+.stage-disqualified {
+  color: rgb(228, 220, 220);
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* Stage - Working */
+.stage-working {
+  background-color: rgb(247, 184, 48);
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* Stage - Yet */
+.stage-yet {
+  background-color: rgb(126, 125, 124);
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .stage-done, .stage-disqualified, .stage-working, .stage-yet {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .stage-done, .stage-disqualified, .stage-working, .stage-yet {
+    font-size: 12px;
+    padding: 6px;
+  }
+}
