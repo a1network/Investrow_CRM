@@ -25,8 +25,10 @@ export const Header = () => {
     <Navbar className="fixed-top bg-white shadow-md px-6 py-3 flex items-center justify-between">
       {/* Logo */}
       <Navbar.Brand className="flex items-center text-gray-800 font-semibold text-lg">
-        <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
-      </Navbar.Brand>
+  <Link to="/" className="flex items-center">
+    <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
+  </Link>
+</Navbar.Brand>
 
       {/* User Info and Logout */}
       <div className="flex items-center gap-4">
