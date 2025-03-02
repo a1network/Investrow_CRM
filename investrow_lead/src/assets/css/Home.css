@@ -29,7 +29,7 @@
 }
 
 .table-head {
-  background-color: hsl(206deg 85.92% 64.22%);
+  background-color: #f48e1a;
   color: white;
   text-align: center;
 }
@@ -40,7 +40,7 @@
   font-size: 60px;
   text-align: center;
   font-weight: 500;
-  color: #0dcaf0;
+  color: #f48e1a;
 }
 
 .summary-title {
@@ -57,7 +57,7 @@
 
 .table-content td {
   width: max-content;
-  border: 2px solid #0dcaf0;
+  border: 2px solid #f48e1a;
   padding: 15px;
   text-align: left;
 }

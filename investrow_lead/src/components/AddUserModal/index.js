@@ -84,21 +84,21 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
           toggleUserModal();
         }}
       />
-      <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">
+      <h2 className="text-2xl font-bold text-center mb-4 text-sky-500">
         Add User
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-gray-700 text-sm">
+          <label htmlFor="name" className="block text-orange-500 font-bold text-sm">
             Name
           </label>
           <input
             id="name"
             type="text"
             {...register("name", { required: "Name is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full  text-sky-500 font-semibold p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.name && (
             <p className="text-red-500 text-xs">{errors.name.message}</p>
@@ -107,7 +107,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
 
         {/* Mobile No */}
         <div>
-          <label htmlFor="mob" className="block text-gray-700 text-sm">
+          <label htmlFor="mob" className="block text-orange-500 font-bold text-sm">
             Mobile No
           </label>
           <input
@@ -120,7 +120,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
                 message: "Invalid Mobile No, must be 10 digits",
               },
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-sky-500 font-semibold p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.mob && (
             <p className="text-red-500 text-xs">{errors.mob.message}</p>
@@ -129,7 +129,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
 
         {/* Email ID */}
         <div>
-          <label htmlFor="email" className="block text-gray-700 text-sm">
+          <label htmlFor="email" className="block text-orange-500 font-bold text-sm">
             Email ID
           </label>
           <input
@@ -142,7 +142,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
                 message: "Invalid email address",
               },
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-sky-500 font-semibold p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.email && (
             <p className="text-red-500 text-xs">{errors.email.message}</p>
@@ -151,15 +151,16 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
 
         {/* Role */}
         <div>
-          <label htmlFor="role" className="block text-gray-700 text-sm">
+          <label htmlFor="role" className="block text-orange-500 font-bold text-sm">
             Role
           </label>
           <select
             id="role"
             {...register("role", { required: "Role is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 text-sky-500 font-semibold border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="user">User</option>
+            <option value="user">Admin</option>
           </select>
           {errors.role && (
             <p className="text-red-500 text-xs">{errors.role.message}</p>
@@ -168,7 +169,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
 
         {/* Password */}
         <div>
-          <label htmlFor="password" className="block text-gray-700 text-sm">
+          <label htmlFor="password" className="block text-orange-500 font-bold text-sm">
             Password
           </label>
           <input
@@ -181,7 +182,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
                 message: "Invalid password",
               },
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-bold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.password && (
             <p className="text-red-500 text-xs">{errors.password.message}</p>
@@ -192,7 +193,7 @@ const AddUsersForm = ({ toggleUserModal = () => {} }) => {
         <div className="text-center">
           <button
             type="submit"
-            className="w-full py-2 bg-blue-500 text-white font-bold rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full py-2 bg-sky-500 text-white font-bold rounded-md hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             Submit
           </button>

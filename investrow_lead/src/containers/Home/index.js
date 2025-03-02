@@ -356,7 +356,7 @@ export const Home = (props) => {
                 marginLeft: "10px",
               }}
             >
-              <h5 className="text-muted mt-2 mb-2 ml-5">Summary</h5>
+              <h5 className="text-muted mt-2 text-sky-500 font-bold text-2xl mb-2 ml-5">Summary</h5>
               <Row
                 style={{
                   borderTop: "1px solid rgb(194, 189, 189)",
@@ -391,7 +391,7 @@ export const Home = (props) => {
 
           <Row className="leads-details">
             <Col className="scroller table-container">
-              <h5 className="text-muted mt-2 mb-3 ml-3 text-2xl">
+              <h5 className="text-muted mt-2 mb-3 ml-3 text-sky-500 font-bold text-2xl">
                 Your Closed Leads 
               </h5>
               {closedLeadsCount  >= 1 ? (

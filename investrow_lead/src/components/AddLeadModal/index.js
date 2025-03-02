@@ -98,21 +98,21 @@ const AddLeadForm = ({
           removeEditLead();
         }}
       />
-      <h2 className="text-2xl font-bold text-center mb-4 text-gray-800">
+      <h2 className="text-2xl font-bold text-center mb-4 text-sky-500">
         Add Lead
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
         {/* Full Name */}
         <div>
-          <label htmlFor="full_name" className="block text-gray-700 text-sm">
+          <label htmlFor="full_name" className="block text-orange-500 font-bold text-sm">
             Full Name
           </label>
           <input
             id="full_name"
             type="text"
             {...register("full_name", { required: "Full Name is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.full_name && (
             <p className="text-red-500 text-xs">{errors.full_name.message}</p>
@@ -121,7 +121,7 @@ const AddLeadForm = ({
 
         {/* Mobile No */}
         <div>
-          <label htmlFor="mobile_no" className="block text-gray-700 text-sm">
+          <label htmlFor="mobile_no" className="block text-orange-500 font-bold text-sm">
             Mobile No
           </label>
           <input
@@ -134,7 +134,7 @@ const AddLeadForm = ({
                 message: "Invalid Mobile No, must be 10 digits",
               },
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-sky-500 font-semibold p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.mobile_no && (
             <p className="text-red-500 text-xs">{errors.mobile_no.message}</p>
@@ -143,7 +143,7 @@ const AddLeadForm = ({
 
         {/* Email ID */}
         <div>
-          <label htmlFor="email_id" className="block text-gray-700 text-sm">
+          <label htmlFor="email_id" className="block text-orange-500 font-bold text-sm">
             Email ID
           </label>
           <input
@@ -156,7 +156,7 @@ const AddLeadForm = ({
                 message: "Invalid email address",
               },
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.email_id && (
             <p className="text-red-500 text-xs">{errors.email_id.message}</p>
@@ -165,13 +165,13 @@ const AddLeadForm = ({
 
         {/* Service */}
         <div>
-          <label htmlFor="service" className="block text-gray-700 text-sm">
+          <label htmlFor="service" className="block text-orange-500 font-bold text-sm">
             Service
           </label>
           <select
             id="service"
             {...register("service", { required: "Service is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Service</option>
             <option value="Mutual Fund">Mutual Fund</option>
@@ -188,13 +188,13 @@ const AddLeadForm = ({
 
         {/* Client */}
         <div>
-          <label htmlFor="client" className="block text-gray-700 text-sm">
+          <label htmlFor="client" className="block text-orange-500 font-bold  text-sm">
             Client
           </label>
           <select
             id="client"
             {...register("client", { required: "Client is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Client </option>
             <option value="New">New</option>
@@ -207,14 +207,14 @@ const AddLeadForm = ({
 
         {/* Address */}
         <div>
-          <label htmlFor="address" className="block text-gray-700 text-sm">
+          <label htmlFor="address" className="block text-orange-500 font-bold text-sm">
             Address
           </label>
           <input
             id="address"
             type="text"
             {...register("address", { required: "Address is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.address && (
             <p className="text-red-500 text-xs">{errors.address.message}</p>
@@ -225,7 +225,7 @@ const AddLeadForm = ({
         <div>
           <label
             htmlFor="reference_name_no"
-            className="block text-gray-700 text-sm"
+            className="block text-orange-500 font-bold text-sm"
           >
             Reference Name/No.
           </label>
@@ -235,7 +235,7 @@ const AddLeadForm = ({
             {...register("reference_name_no", {
               required: "Reference is required",
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full text-sky-500 font-semibold p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.reference_name_no && (
             <p className="text-red-500 text-xs">
@@ -246,13 +246,13 @@ const AddLeadForm = ({
 
         {/* Remarks */}
         <div>
-          <label htmlFor="remarks" className="block text-gray-700 text-sm">
+          <label htmlFor="remarks" className="block text-orange-500 font-bold text-sm">
             Remarks
           </label>
           <textarea
             id="remarks"
             {...register("remarks", { required: "Remarks are required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.remarks && (
             <p className="text-red-500 text-xs">{errors.remarks.message}</p>
@@ -263,7 +263,7 @@ const AddLeadForm = ({
         <div>
           <label
             htmlFor="follow_up_date_time"
-            className="block text-gray-700 text-sm"
+            className="block text-orange-500 font-bold  text-sm"
           >
             Follow Up Date/Time
           </label>
@@ -273,7 +273,7 @@ const AddLeadForm = ({
             {...register("follow_up_date_time", {
               required: "Follow Up Date/Time is required",
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 text-sky-500 font-semibold border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           {errors.follow_up_date_time && (
             <p className="text-red-500 text-xs">
@@ -299,13 +299,13 @@ const AddLeadForm = ({
 
         {/* Action */}
         <div>
-          <label htmlFor="action" className="block text-gray-700 text-sm">
+          <label htmlFor="action" className="block text-orange-500 font-bold text-sm">
             Lead Status
           </label>
           <select
             id="action"
             {...register("action", { required: "Action is required" })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select Action</option>
             <option value="Follow Up">Follow Up</option>
@@ -321,7 +321,7 @@ const AddLeadForm = ({
 
         {/* Assigned To */}
         <div>
-          <label htmlFor="action" className="block text-gray-700 text-sm">
+          <label htmlFor="action" className="block text-orange-500 font-bold text-sm">
             Assign To
           </label>
           <select
@@ -329,7 +329,7 @@ const AddLeadForm = ({
             {...register("assignTo", {
               required: false /* "Asssign is required" */,
             })}
-            className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full p-2 border text-sky-500 font-semibold border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
             <option value="">Select User</option>
             {users.map((item, index) => (
