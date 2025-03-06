@@ -18,7 +18,7 @@ import { isAdmin } from "../middlewares/authMiddleware.js";
 
 router.post("/login",isAdmin, login);
 router.get("/",isAdmin, getAllLeads);
-router.get("/getUsers", getAllUsers);
+router.get("/getUsers",isAdmin, getAllUsers);
 router.post("/add-user", isAdmin, addUser);
 router.post("/add-lead", addLead);
 router.put("/edit-lead/", editLead);
