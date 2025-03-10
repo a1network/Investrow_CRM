@@ -18,6 +18,10 @@ import AddUserModal from "../../components/AddUserModal";
 import { IoMdAddCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
+import { Navbar } from "react-bootstrap";
+import logo from "../../assets/images/Investrow_logo.png";
+import { logout } from "../../actions";
+
 
 /**
  * @author
@@ -44,6 +48,9 @@ export const Home = (props) => {
    const [showUsers, setShowUsers] = useState(false);
 
   const  [closedLeadsCount ,setclosedLeadsCount ] = useState(0)
+  const signout = () => {
+      dispatch(logout());
+    };
 
   useEffect(() => {
     dispatch(getAllLeads());
@@ -240,6 +247,8 @@ export const Home = (props) => {
   };
 
   return (
+
+    
     <Layout>
       {addLeadsModal && (
         <AddLeadModal
@@ -260,71 +269,100 @@ export const Home = (props) => {
               Select lead ID to populate form below for actioning.
             </p> */}
 
-            <div className="flex justify-between mb-5 max-w-[1300px]">
-              <span
-                onClick={() => setAddLeadsModal(true)}
-                className="cursor-pointer flex ml-7 mt-4 mb-0 items-center gap-1 font-semibold text-sky-500"
-              >
-                <IoMdAddCircle /> Add Lead
-              </span>
-              {userRole === "admin" && (
-                <span
-                  onClick={() => setAddUserModal(true)}
-                  className="cursor-pointer flex ml-7 mt-4 mb-0 items-center gap-1 font-semibold text-sky-500"
-                >
-                  <IoMdAddCircle /> Add User
-                </span>
-              )}
+<div className="sticky top-0 bg-white shadow-md border-b border-orange-500 z-50">
+  <div className="flex justify-between items-center px-6 py-3 max-w-[1600px] mx-auto">
+    
+    {/* Left - Logo */}
+    <div className="flex-shrink-0">
+      <Navbar.Brand className="flex items-center text-gray-800 font-semibold text-lg">
+        <Link to="/" className="flex items-center">
+          <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
+        </Link>
+      </Navbar.Brand>
+    </div>
 
-<Row className="cursor-pointer mb-3 flex gap-8 mt-10 ml-5">
-  <Col className="col-10 text-muted"></Col>
-  <Col className="col-1">
-    {showSearch && (
-      <input
-        className="search-input"
-        value={searchInput}
-        onChange={(e) => setSearchInput(e.target.value)}
-        placeholder="Search for leads"
-      />
-    )}
-    <a
-      className="btn-sm"
-      variant="success"
-      type="btn"
-      style={{
-        border: "1px solid rgb(194, 189, 189)",
-        borderRadius: "5px",
-      }}
-    >
-      <i
-        onClick={() => setShowSearch(!showSearch)}
-        className="bi bi-search text-white ms-2"
-      ></i>
-    </a>
-  </Col>
-</Row>
-           {/* Show Users Button */}
-           <span className="text-sky-500 font-medium mt-8 cursor-pointer" onClick={() => setShowUsers(!showUsers)}>
-          Show Users
+    {/* Center - Actions */}
+    <div className="flex-1 flex justify-center items-center gap-10">
+      <span
+        onClick={() => setAddLeadsModal(true)}
+        className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+      >
+        <IoMdAddCircle /> Add Lead
+      </span>
+      
+      {userRole === "admin" && (
+        <span
+          onClick={() => setAddUserModal(true)}
+          className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+        >
+          <IoMdAddCircle /> Add User
         </span>
+      )}
 
-        {/* User List (Visible when showUsers is true) */}
-        {showUsers && (
-          <div className="absolute bg-white border border-gray-300 shadow-md mt-2 p-3 rounded-lg max-h-40 overflow-auto">
-            {users.length > 0 ? (
-              users.map((user) => (
-                <p key={user.user_id} className="text-gray-700">
-                  {user.name}
-                </p>
-              ))
-            ) : (
-              <p className="text-gray-500">No users available</p>
-            )}
-          </div>
+      {/* Search Bar */}
+      <div className="relative flex items-center">
+        {showSearch && (
+          <input
+            className="search-input border border-gray-300 rounded-lg px-3 py-1"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search for leads"
+          />
         )}
+        <i
+          onClick={() => setShowSearch(!showSearch)}
+          className="bi bi-search text-gray-600 cursor-pointer ml-2"
+        ></i>
+      </div>
+
+      {/* Show Users Button */}
+      <span
+        className="text-sky-500 font-medium cursor-pointer"
+        onClick={() => setShowUsers(!showUsers)}
+      >
+        Show Users
+      </span>
+
+      {/* User List */}
+      {showUsers && (
+        <div className="absolute right-10 top-12 bg-white border border-gray-300 shadow-md p-3 rounded-lg max-h-40 overflow-auto">
+          {users.length > 0 ? (
+            users.map((user) => (
+              <p key={user.user_id} className="text-gray-700">
+                {user.name}
+              </p>
+            ))
+          ) : (
+            <p className="text-gray-500">No users available</p>
+          )}
+        </div>
+      )}
+    </div>
+
+    {/* Right - User Info and Logout */}
+    <div className="flex-shrink-0 flex items-center gap-4">
+      {auth.user ? (
+        <Navbar.Text className="text-gray-700 font-medium">
+          Welcome, {" "}
+          <Link to="/admin-profile" className="text-sky-500 hover:underline">
+            {auth.user.name}
+          </Link>
+        </Navbar.Text>
+      ) : (
+        <Navbar.Text className="text-gray-500">Not Logged In</Navbar.Text>
+      )}
+
+      <i
+        className="bi bi-box-arrow-right text-xl text-green-500 cursor-pointer hover:text-red-500 transition"
+        onClick={signout}
+      ></i>
+    </div>
+
+  </div>
+</div>
 
 
-            </div>
+
 
             <Col className="scroller table-container">
               <Table striped bordered hover size="sm" className="table">

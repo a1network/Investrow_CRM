@@ -25,7 +25,7 @@ export const Layout = (props) => {
   };
   return (
     <div style={{ marginLeft: wid }}>
-      <Header></Header>
+      {/* <Header></Header> */}
       {/* <i className="bi bi-three-dots" onClick={openSidenav}></i> */}
       <SideNav width={wid} closeNav={closeSidenav} />
       {/* <GetData /> */}
