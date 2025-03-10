@@ -14,8 +14,11 @@ export const Footer = (props) => {
       <Row>
         <Col md={12}>
           <div style={{ borderTop: "1px solid green" }}>
-            <p className="footer-item">&copy; Investrow </p>
+           <div className=" flex flex-end text-sky-500">
+            <p className="footer-item">&copy; INVESTROW 2025  (PVT LTD) | All Rights Reserved </p>
+            </div>
           </div>
+         
         </Col>
         {/* <Col md={2}>
           <img src={logo} className="nav-logo" alt="" />
