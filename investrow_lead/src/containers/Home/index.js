@@ -47,6 +47,10 @@ export const Home = (props) => {
     const users = useSelector((state) => state.leads.users);
    const [showUsers, setShowUsers] = useState(false);
 
+   const NavbarComponent = ({ logo, userRole, auth, users }) 
+   
+    const [menuOpen, setMenuOpen] = useState(false);
+
   const  [closedLeadsCount ,setclosedLeadsCount ] = useState(0)
   const signout = () => {
       dispatch(logout());
@@ -269,97 +273,117 @@ export const Home = (props) => {
               Select lead ID to populate form below for actioning.
             </p> */}
 
-<div className="sticky top-0 bg-white shadow-md border-b border-orange-500 z-50">
-  <div className="flex justify-between items-center px-6 py-3 max-w-[1600px] mx-auto">
-    
-    {/* Left - Logo */}
-    <div className="flex-shrink-0">
-      <Navbar.Brand className="flex items-center text-gray-800 font-semibold text-lg">
-        <Link to="/" className="flex items-center">
-          <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
-        </Link>
-      </Navbar.Brand>
-    </div>
-
-    {/* Center - Actions */}
-    <div className="flex-1 flex justify-center items-center gap-10">
-      <span
-        onClick={() => setAddLeadsModal(true)}
-        className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
-      >
-        <IoMdAddCircle /> Add Lead
-      </span>
-      
-      {userRole === "admin" && (
-        <span
-          onClick={() => setAddUserModal(true)}
-          className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
-        >
-          <IoMdAddCircle /> Add User
-        </span>
-      )}
-
-      {/* Search Bar */}
-      <div className="relative flex items-center">
-        {showSearch && (
-          <input
-            className="search-input border border-gray-300 rounded-lg px-3 py-1"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-            placeholder="Search for leads"
-          />
-        )}
-        <i
-          onClick={() => setShowSearch(!showSearch)}
-          className="bi bi-search text-gray-600 cursor-pointer ml-2"
-        ></i>
-      </div>
-
-      {/* Show Users Button */}
-      <span
-        className="text-sky-500 font-medium cursor-pointer"
-        onClick={() => setShowUsers(!showUsers)}
-      >
-        Show Users
-      </span>
-
-      {/* User List */}
-      {showUsers && (
-        <div className="absolute right-10 top-12 bg-white border border-gray-300 shadow-md p-3 rounded-lg max-h-40 overflow-auto">
-          {users.length > 0 ? (
-            users.map((user) => (
-              <p key={user.user_id} className="text-gray-700">
-                {user.name}
-              </p>
-            ))
-          ) : (
-            <p className="text-gray-500">No users available</p>
-          )}
-        </div>
-      )}
-    </div>
-
-    {/* Right - User Info and Logout */}
-    <div className="flex-shrink-0 flex items-center gap-4">
-      {auth.user ? (
-        <Navbar.Text className="text-gray-700 font-medium">
-          Welcome, {" "}
-          <Link to="/admin-profile" className="text-sky-500 hover:underline">
-            {auth.user.name}
+<div className="sticky top-0 bg-white shadow-md border-b border-gray-300 z-50 w-full">
+      <div className="flex justify-between items-center px-4 md:px-6 py-3 max-w-screen-xl mx-auto">
+        
+        {/* Left - Logo */}
+        <div className="flex items-center">
+          <Link to="/" className="flex items-center">
+            <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
           </Link>
-        </Navbar.Text>
-      ) : (
-        <Navbar.Text className="text-gray-500">Not Logged In</Navbar.Text>
-      )}
+        </div>
 
-      <i
-        className="bi bi-box-arrow-right text-xl text-green-500 cursor-pointer hover:text-red-500 transition"
-        onClick={signout}
-      ></i>
-    </div>
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden text-gray-600 text-2xl"
+        >
+          ☰
+        </button>
 
-  </div>
-</div>
+        {/* Center - Actions (Hidden on Mobile, Shown on Larger Screens) */}
+        <div className={`md:flex items-center gap-6 ${menuOpen ? "flex flex-col absolute top-14 left-0 w-full bg-white p-4 border-b border-gray-200 shadow-md" : "hidden"}`}>
+          
+          {/* Add Lead */}
+          <span
+           onClick={() => {
+            setAddLeadsModal(true); // Open the modal
+            setMenuOpen(false); // Close the mobile menu
+          }}
+            className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+          >
+            <IoMdAddCircle /> Add Lead
+          </span>
+
+          {/* Add User (Admin Only) */}
+          {userRole === "admin" && (
+            <span
+               onClick={() => {
+            setAddUserModal(true); // Open the modal
+            setMenuOpen(false); // Close the mobile menu
+          }}
+              className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+            >
+              <IoMdAddCircle /> Add User
+            </span>
+          )}
+
+          {/* Search Bar */}
+          <div className="relative flex items-center">
+            {showSearch && (
+              <input
+                className="search-input border border-gray-300 rounded-lg px-3 py-1 w-40 md:w-auto"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                placeholder="Search for leads"
+              />
+            )}
+            <i
+              onClick={() => setShowSearch(!showSearch)}
+              className="bi bi-search text-gray-600 cursor-pointer ml-2"
+            ></i>
+          </div>
+
+          {/* Show Users Button */}
+         <span
+  className="text-sky-500 font-medium cursor-pointer"
+  onClick={() => {
+    setShowUsers(false); // Toggle user list visibility // curently off because the feature is not build yet
+    setMenuOpen(false); // Close the mobile menu
+  }}
+>
+  Show Users
+</span>
+
+          {/* User List */}
+          {showUsers && (
+            <div className="absolute right-5 top-14 bg-white border border-gray-300 shadow-md p-3 rounded-lg max-h-40 overflow-auto">
+              {users.length > 0 ? (
+                users.map((user) => (
+                  <p key={user.user_id} className="text-gray-700">
+                    {user.name}
+                  </p>
+                ))
+              ) : (
+                <p className="text-gray-500">No users available</p>
+              )}
+            </div>
+          )}
+          
+        </div>
+
+        {/* Right - User Info and Logout (Always Visible) */}
+        <div className="flex items-center gap-4">
+          {auth.user ? (
+            <Navbar.Text className="text-gray-700 font-medium hidden md:block">
+              Welcome,{" "}
+              <Link to="/admin-profile" className="text-sky-500 hover:underline">
+                {auth.user.name}
+              </Link>
+            </Navbar.Text>
+          ) : (
+            <Navbar.Text className="text-gray-500 hidden md:block">
+              Not Logged In
+            </Navbar.Text>
+          )}
+
+          <i
+            className="bi bi-box-arrow-right text-xl text-green-500 cursor-pointer hover:text-red-500 transition"
+            onClick={signout}
+          ></i>
+        </div>
+      </div>
+    </div> 
 
 
 
