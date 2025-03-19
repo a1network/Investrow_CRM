@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import { Row, Col, Button, Table, Form } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
 import { Link } from "react-router-dom";
@@ -41,6 +41,8 @@ export const Home = (props) => {
   const [addUserModal, setAddUserModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [filteredLeads, setFilteredLeads] = useState(leads);
+  const [selectedUser, setSelectedUser] = useState(null); // ✅ Define selectedUser
+
   const [editLead, setEditLead] = useState({});
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
@@ -52,6 +54,7 @@ export const Home = (props) => {
     const [menuOpen, setMenuOpen] = useState(false);
 
   const  [closedLeadsCount ,setclosedLeadsCount ] = useState(0)
+  
   const signout = () => {
       dispatch(logout());
     };
@@ -88,6 +91,15 @@ export const Home = (props) => {
       setFilteredLeads(filtered); // Update the filtered leads
     }
   }, [searchInput, leads]); // Re-run this effect whenever searchInput or leads changes
+// this is for the user filter
+  useEffect(() => {
+  if (selectedUser) {
+    setFilteredLeads(leads.filter((lead) => lead.user_id === selectedUser.user_id));
+  } else {
+    setFilteredLeads(leads);
+  }
+}, [selectedUser, leads]);
+
 
   function convertTZ(date, tzString) {
     return new Date(
@@ -111,7 +123,27 @@ export const Home = (props) => {
   const removeEditLead = () => {
     setEditLead(() => {});
   };
+  // this is for the user filter drop down and  cursor handler
+  const dropdownRef = useRef(null);
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowUsers(false);
+      }
+    };
+
+    if (showUsers) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [showUsers]);
+
+ 
+  
   const renderLeads = (leads) => {
     let leadItem = [];
     for (let lead of leads) {
@@ -249,6 +281,15 @@ export const Home = (props) => {
   const closeAddUserModal = () => {
     setAddUserModal(false);
   };
+  const deleteUser = (user) => {
+    // Your logic to delete the user
+    console.log("Deleting user with ID:", users.user_id);
+  };
+  
+
+  const showUserFilteredLeads = selectedUser
+  ? leads.filter((lead) => lead.user_id === selectedUser.user_id)
+  : leads;
 
   return (
 
@@ -319,9 +360,10 @@ export const Home = (props) => {
           )}
 
           {/* Search Bar */}
-          <div className="relative flex items-center">
+          <div  className="relative flex items-center">
+          
             {showSearch && (
-              <input
+              <input 
                 className="search-input border border-gray-300 rounded-lg px-3 py-1 w-40 md:w-auto"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
@@ -334,31 +376,52 @@ export const Home = (props) => {
             ></i>
           </div>
 
-          {/* Show Users Button */}
+
+
+          {/* Show Users section */}
          <span
   className="text-sky-500 font-medium cursor-pointer"
   onClick={() => {
-    setShowUsers(false); // Toggle user list visibility // curently off because the feature is not build yet
-    setMenuOpen(false); // Close the mobile menu
+    setShowUsers(true); // Toggle user list visibility // curently off because the feature is not build yet
+
   }}
 >
   Show Users
 </span>
 
-          {/* User List */}
-          {showUsers && (
-            <div className="absolute right-5 top-14 bg-white border border-gray-300 shadow-md p-3 rounded-lg max-h-40 overflow-auto">
-              {users.length > 0 ? (
-                users.map((user) => (
-                  <p key={user.user_id} className="text-gray-700">
-                    {user.name}
-                  </p>
-                ))
-              ) : (
-                <p className="text-gray-500">No users available</p>
-              )}
-            </div>
-          )}
+{showUsers && (
+  <div
+    ref={dropdownRef}
+    className="absolute left-1/2 transform -translate-x-1/2 top-14 bg-white border border-gray-300 shadow-md p-2 rounded-lg max-h-32 overflow-auto w-48"
+  >
+    {users.length > 0 ? (
+      users.map((user) => (
+        <div
+          key={user.user_id}
+          className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 p-1"
+          onClick={() => {
+            setSelectedUser(user); // ✅ Select user
+            setShowUsers(false); // ✅ Close dropdown
+          }}
+        >
+          <span>{user.name}</span>
+          <MdDelete
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent triggering parent div click
+              deleteUser(user.user_id);
+            }}
+            style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
+          />
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500 text-center">No users available</p>
+    )}
+  </div>
+)}
+
+
+   
           
         </div>
 
