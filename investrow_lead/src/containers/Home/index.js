@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Row, Col, Button, Table, Form } from "react-bootstrap";
 import { Layout } from "../../components/Layout";
 import { Link } from "react-router-dom";
@@ -21,7 +21,6 @@ import { FaEdit } from "react-icons/fa";
 import { Navbar } from "react-bootstrap";
 import logo from "../../assets/images/Investrow_logo.png";
 import { logout } from "../../actions";
-
 
 /**
  * @author
@@ -46,18 +45,18 @@ export const Home = (props) => {
   const [editLead, setEditLead] = useState({});
   const [showSearch, setShowSearch] = useState(false);
   const navigate = useNavigate();
-    const users = useSelector((state) => state.leads.users);
-   const [showUsers, setShowUsers] = useState(false);
+  const users = useSelector((state) => state.leads.users);
+  const [showUsers, setShowUsers] = useState(false);
 
-   const NavbarComponent = ({ logo, userRole, auth, users }) 
-   
-    const [menuOpen, setMenuOpen] = useState(false);
+  const NavbarComponent = { logo, userRole, auth, users };
 
-  const  [closedLeadsCount ,setclosedLeadsCount ] = useState(0)
-  
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const [closedLeadsCount, setclosedLeadsCount] = useState(0);
+
   const signout = () => {
-      dispatch(logout());
-    };
+    dispatch(logout());
+  };
 
   useEffect(() => {
     dispatch(getAllLeads());
@@ -67,7 +66,7 @@ export const Home = (props) => {
         count.push(lead);
       }
     }
-    setclosedLeadsCount(count.length)
+    setclosedLeadsCount(count.length);
     console.log("leads from home index", leads);
   }, [leads]);
 
@@ -91,15 +90,16 @@ export const Home = (props) => {
       setFilteredLeads(filtered); // Update the filtered leads
     }
   }, [searchInput, leads]); // Re-run this effect whenever searchInput or leads changes
-// this is for the user filter
+  // this is for the user filter
   useEffect(() => {
-  if (selectedUser) {
-    setFilteredLeads(leads.filter((lead) => lead.user_id === selectedUser.user_id));
-  } else {
-    setFilteredLeads(leads);
-  }
-}, [selectedUser, leads]);
-
+    if (selectedUser) {
+      setFilteredLeads(
+        leads.filter((lead) => lead.user_id === selectedUser.user_id)
+      );
+    } else {
+      setFilteredLeads(leads);
+    }
+  }, [selectedUser, leads]);
 
   function convertTZ(date, tzString) {
     return new Date(
@@ -142,8 +142,6 @@ export const Home = (props) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [showUsers]);
 
- 
-  
   const renderLeads = (leads) => {
     let leadItem = [];
     for (let lead of leads) {
@@ -169,9 +167,14 @@ export const Home = (props) => {
               {lead.user_name ? lead.user_name : "Not Assigned"}
             </td>
             <td>
-              <FaEdit onClick={() => assignLead(lead.lead_id, _id)}
-              style={{ cursor: "pointer", fontSize: "15px", color: "skyblue" }}
-               />
+              <FaEdit
+                onClick={() => assignLead(lead.lead_id, _id)}
+                style={{
+                  cursor: "pointer",
+                  fontSize: "15px",
+                  color: "skyblue",
+                }}
+              />
             </td>
             <td>
               <MdDelete
@@ -203,8 +206,14 @@ export const Home = (props) => {
               {lead.user_name ? lead.user_name : "Not Assigned"}
             </td>
             <td>
-              <FaEdit onClick={() => assignLead(lead.lead_id, _id)}
-              style={{ cursor: "pointer", fontSize: "15px", color: "skyblue" }} />
+              <FaEdit
+                onClick={() => assignLead(lead.lead_id, _id)}
+                style={{
+                  cursor: "pointer",
+                  fontSize: "15px",
+                  color: "skyblue",
+                }}
+              />
             </td>
             <td>
               <MdDelete
@@ -222,7 +231,7 @@ export const Home = (props) => {
   const renderClosedLeads = (leads) => {
     let leadItem = [];
     for (let lead of leads) {
-      if ( lead.action === "Closed") {
+      if (lead.action === "Closed") {
         leadItem.push(
           <tr className="table-content" key={lead.lead_id}>
             <td>{lead.lead_id}</td>
@@ -238,8 +247,14 @@ export const Home = (props) => {
             <td>{lead.action}</td>
             <td>{lead.user_name}</td>
             <td>
-              <FaEdit onClick={() => assignLead(lead.lead_id, _id)}
-               style={{ cursor: "pointer", fontSize: "15px", color: "skyblue" }} />
+              <FaEdit
+                onClick={() => assignLead(lead.lead_id, _id)}
+                style={{
+                  cursor: "pointer",
+                  fontSize: "15px",
+                  color: "skyblue",
+                }}
+              />
             </td>
             <td>
               <MdDelete
@@ -252,7 +267,6 @@ export const Home = (props) => {
       }
     }
 
-    
     return leadItem;
   };
 
@@ -271,7 +285,7 @@ export const Home = (props) => {
   };
 
   // const closedLeadsCount = (leads) => {
-   
+
   //   return count.length;
   // };
 
@@ -285,15 +299,12 @@ export const Home = (props) => {
     // Your logic to delete the user
     console.log("Deleting user with ID:", users.user_id);
   };
-  
 
   const showUserFilteredLeads = selectedUser
-  ? leads.filter((lead) => lead.user_id === selectedUser.user_id)
-  : leads;
+    ? leads.filter((lead) => lead.user_id === selectedUser.user_id)
+    : leads;
 
   return (
-
-    
     <Layout>
       {addLeadsModal && (
         <AddLeadModal
@@ -314,142 +325,157 @@ export const Home = (props) => {
               Select lead ID to populate form below for actioning.
             </p> */}
 
-<div className="sticky top-0 bg-white shadow-md border-b border-gray-300 z-50 w-full">
-      <div className="flex justify-between items-center px-4 md:px-6 py-3 max-w-screen-xl mx-auto">
-        
-        {/* Left - Logo */}
-        <div className="flex items-center">
-          <Link to="/" className="flex items-center">
-            <img src={logo} className="h-10 w-auto mr-2" alt="Investrow Logo" />
-          </Link>
-        </div>
+            <div className="sticky top-0 bg-white shadow-md border-b border-gray-300 z-50 w-full">
+              <div className="flex justify-between items-center px-4 md:px-6 py-3 max-w-screen-xl mx-auto">
+                {/* Left - Logo */}
+                <div className="flex items-center">
+                  <Link
+                    to="/"
+                    className="flex items-center"
+                    onClick={() =>
+                      window.scrollTo({ top: 0, behavior: "smooth" })
+                    }
+                  >
+                    <img
+                      src={logo}
+                      className="h-10 w-auto mr-2"
+                      alt="Investrow Logo"
+                    />
+                  </Link>
+                </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-gray-600 text-2xl"
-        >
-          ☰
-        </button>
+                {/* Mobile Menu Button */}
+                <button
+                  onClick={() => setMenuOpen(!menuOpen)}
+                  className="md:hidden text-gray-600 text-2xl"
+                >
+                  ☰
+                </button>
 
-        {/* Center - Actions (Hidden on Mobile, Shown on Larger Screens) */}
-        <div className={`md:flex items-center gap-6 ${menuOpen ? "flex flex-col absolute top-14 left-0 w-full bg-white p-4 border-b border-gray-200 shadow-md" : "hidden"}`}>
-          
-          {/* Add Lead */}
-          <span
-           onClick={() => {
-            setAddLeadsModal(true); // Open the modal
-            setMenuOpen(false); // Close the mobile menu
-          }}
-            className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
-          >
-            <IoMdAddCircle /> Add Lead
-          </span>
+                {/* Center - Actions (Hidden on Mobile, Shown on Larger Screens) */}
+                <div
+                  className={`md:flex items-center gap-6 ${
+                    menuOpen
+                      ? "flex flex-col absolute top-14 left-0 w-full bg-white p-4 border-b border-gray-200 shadow-md"
+                      : "hidden"
+                  }`}
+                >
+                  {/* Add Lead */}
+                  <span
+                    onClick={() => {
+                      setAddLeadsModal(true); // Open the modal
+                      setMenuOpen(false); // Close the mobile menu
+                      window.scrollTo({ top: 0 });
+                    }}
+                    className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+                  >
+                    <IoMdAddCircle /> Add Lead
+                  </span>
 
-          {/* Add User (Admin Only) */}
-          {userRole === "admin" && (
-            <span
-               onClick={() => {
-            setAddUserModal(true); // Open the modal
-            setMenuOpen(false); // Close the mobile menu
-          }}
-              className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
-            >
-              <IoMdAddCircle /> Add User
-            </span>
-          )}
+                  {/* Add User (Admin Only) */}
+                  {userRole === "admin" && (
+                    <span
+                    onClick={() => {
+                      setAddUserModal(true); // Open the modal
+                      setMenuOpen(false); // Close the mobile menu
+                      window.scrollTo({ top: 0, behavior: "instant" }); 
+                    }}
+                    className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+                  >
+                    <IoMdAddCircle /> Add User
+                  </span>
+                  
+                  )}
 
-          {/* Search Bar */}
-          <div  className="relative flex items-center">
-          
-            {showSearch && (
-              <input 
-                className="search-input border border-gray-300 rounded-lg px-3 py-1 w-40 md:w-auto"
-                value={searchInput}
-                onChange={(e) => setSearchInput(e.target.value)}
-                placeholder="Search for leads"
-              />
-            )}
-            <i
-              onClick={() => setShowSearch(!showSearch)}
-              className="bi bi-search text-gray-600 cursor-pointer ml-2"
-            ></i>
-          </div>
+                  {/* Search Bar */}
+                  <div className="relative flex items-center">
+                    {showSearch && (
+                      <input
+                        className="search-input border border-gray-300 rounded-lg px-3 py-1 w-40 md:w-auto"
+                        value={searchInput}
+                        onChange={(e) => setSearchInput(e.target.value)}
+                        placeholder="Search for leads"
+                      />
+                    )}
+                    <i
+                      onClick={() => setShowSearch(!showSearch)}
+                      className="bi bi-search text-gray-600 cursor-pointer ml-2"
+                    ></i>
+                  </div>
 
+                  {/* Show Users section admin only */}
+                  {userRole === "admin" && (
+                    <span
+                      className="text-sky-500 font-medium cursor-pointer"
+                      onClick={() => {
+                        setShowUsers(true); // Toggle user list visibility // curently off because the feature is not build yet
+                      }}
+                    >
+                      Show Users
+                    </span>
+                  )}
+                  {showUsers && (
+                    <div
+                      ref={dropdownRef}
+                      className="absolute left-1/2 transform -translate-x-1/2 top-14 bg-white border border-gray-300 shadow-md p-2 rounded-lg max-h-32 overflow-auto w-48"
+                    >
+                      {users.length > 0 ? (
+                        users.map((user) => (
+                          <div
+                            key={user.user_id}
+                            if
+                            className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 hover:title = show user's lead rounded p-1"
+                            title="show user's lead"
+                            onClick={() => {
+                              setSelectedUser(user); // ✅ Select user
+                              setShowUsers(false); // ✅ Close dropdown
+                            }}
+                          >
+                            <span>{user.name}</span>
+                            <MdDelete
+                              onClick={(e) => {
+                                e.stopPropagation(); // Prevents selecting the user when clicking delete
+                                deleteUser(user.user_id);
+                              }}
+                              className="cursor-pointer text-red-500 text-[15px] hover:text-red-700"
+                              title="Delete User" // Shows tooltip on hover
+                            />
+                          </div>
+                        ))
+                      ) : (
+                        <p className="text-gray-500 text-center">
+                          No users available
+                        </p>
+                      )}
+                    </div>
+                  )}
+                </div>
 
+                {/* Right - User Info and Logout (Always Visible) */}
+                <div className="flex items-center gap-4">
+                  {auth.user ? (
+                    <Navbar.Text className="text-gray-700 font-medium hidden md:block">
+                      Welcome,{" "}
+                      <Link
+                        to="/admin-profile"
+                        className="text-sky-500 hover:underline"
+                      >
+                        {auth.user.name}
+                      </Link>
+                    </Navbar.Text>
+                  ) : (
+                    <Navbar.Text className="text-gray-500 hidden md:block">
+                      Not Logged In
+                    </Navbar.Text>
+                  )}
 
-          {/* Show Users section */}
-         <span
-  className="text-sky-500 font-medium cursor-pointer"
-  onClick={() => {
-    setShowUsers(true); // Toggle user list visibility // curently off because the feature is not build yet
-
-  }}
->
-  Show Users
-</span>
-
-{showUsers && (
-  <div
-    ref={dropdownRef}
-    className="absolute left-1/2 transform -translate-x-1/2 top-14 bg-white border border-gray-300 shadow-md p-2 rounded-lg max-h-32 overflow-auto w-48"
-  >
-    {users.length > 0 ? (
-      users.map((user) => (
-        <div
-          key={user.user_id}
-          className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 p-1"
-          onClick={() => {
-            setSelectedUser(user); // ✅ Select user
-            setShowUsers(false); // ✅ Close dropdown
-          }}
-        >
-          <span>{user.name}</span>
-          <MdDelete
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent triggering parent div click
-              deleteUser(user.user_id);
-            }}
-            style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
-          />
-        </div>
-      ))
-    ) : (
-      <p className="text-gray-500 text-center">No users available</p>
-    )}
-  </div>
-)}
-
-
-   
-          
-        </div>
-
-        {/* Right - User Info and Logout (Always Visible) */}
-        <div className="flex items-center gap-4">
-          {auth.user ? (
-            <Navbar.Text className="text-gray-700 font-medium hidden md:block">
-              Welcome,{" "}
-              <Link to="/admin-profile" className="text-sky-500 hover:underline">
-                {auth.user.name}
-              </Link>
-            </Navbar.Text>
-          ) : (
-            <Navbar.Text className="text-gray-500 hidden md:block">
-              Not Logged In
-            </Navbar.Text>
-          )}
-
-          <i
-            className="bi bi-box-arrow-right text-xl text-green-500 cursor-pointer hover:text-red-500 transition"
-            onClick={signout}
-          ></i>
-        </div>
-      </div>
-    </div> 
-
-
-
+                  <i
+                    className="bi bi-box-arrow-right text-xl text-green-500 cursor-pointer hover:text-red-500 transition"
+                    onClick={signout}
+                  ></i>
+                </div>
+              </div>
+            </div>
 
             <Col className="scroller table-container">
               <Table striped bordered hover size="sm" className="table">
@@ -481,12 +507,13 @@ export const Home = (props) => {
                 marginLeft: "10px",
               }}
             >
-              <h5 className="text-muted mt-2 text-sky-500 font-bold text-2xl mb-2 ml-5">Summary</h5>
+              <h5 className="text-muted mt-2 text-sky-500 font-bold text-2xl mb-2 ml-5">
+                Summary
+              </h5>
               <Row
                 style={{
                   borderTop: "1px solid rgb(194, 189, 189)",
                   borderBottom: "1px solid rgb(194, 189, 189)",
-                  
 
                   display: "flex",
                   justifyContent: "space-evenly",
@@ -517,10 +544,10 @@ export const Home = (props) => {
           <Row className="leads-details">
             <Col className="scroller table-container">
               <h5 className="text-muted mt-2 mb-3 ml-3 text-sky-500 font-bold text-2xl">
-                Your Closed Leads 
+                Your Closed Leads
               </h5>
-              {closedLeadsCount  >= 1 ? (
-                  <Table
+              {closedLeadsCount >= 1 ? (
+                <Table
                   striped
                   bordered
                   hover
@@ -544,11 +571,9 @@ export const Home = (props) => {
                   </thead>
                   <tbody>{renderClosedLeads(leads)}</tbody>
                 </Table>
-              
               ) : (
                 <a className="ml-3 text-xl">Closed Leads will appear here</a>
               )}
-              
             </Col>
           </Row>
         </div>
