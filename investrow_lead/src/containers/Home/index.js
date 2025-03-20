@@ -169,7 +169,7 @@ export const Home = (props) => {
             <td>
               <FaEdit
                 onClick={() => {
-                  assignLead(lead.lead_id, _id)
+                  assignLead(lead.lead_id, _id);
                   window.scrollTo({ top: 0, behavior: "instant" });
                 }}
                 style={{
@@ -250,23 +250,22 @@ export const Home = (props) => {
             <td>{lead.action}</td>
             <td>{lead.user_name}</td>
             <td>
-            <FaEdit
-  onClick={() => {
-    window.scrollTo({ top: 0, behavior: "instant" }); // Scroll to the top
-    assignLead(lead.lead_id, _id); // Call the function properly
-  }}
-  style={{
-    cursor: "pointer",
-    fontSize: "15px",
-    color: "skyblue",
-  }}
-/>
-
+              <FaEdit
+                onClick={() => {
+                  window.scrollTo({ top: 0, behavior: "instant" }); // Scroll to the top
+                  assignLead(lead.lead_id, _id); // Call the function properly
+                }}
+                style={{
+                  cursor: "pointer",
+                  fontSize: "15px",
+                  color: "skyblue",
+                }}
+              />
             </td>
             <td>
               <MdDelete
-                onClick={() => {deletelead(lead.lead_id)
-                
+                onClick={() => {
+                  deletelead(lead.lead_id);
                 }}
                 style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
               />
@@ -307,6 +306,11 @@ export const Home = (props) => {
   const deleteUser = (user) => {
     // Your logic to delete the user
     console.log("Deleting user with ID:", users.user_id);
+  };
+
+  const leadNeedsReassignment = (lead) => {
+    // Your logic to reassign the lead
+    console.log("Reassigning lead with ID:", lead.lead_id);
   };
 
   const showUserFilteredLeads = selectedUser
@@ -384,16 +388,15 @@ export const Home = (props) => {
                   {/* Add User (Admin Only) */}
                   {userRole === "admin" && (
                     <span
-                    onClick={() => {
-                      setAddUserModal(true); // Open the modal
-                      setMenuOpen(false); // Close the mobile menu
-                      window.scrollTo({ top: 0, behavior: "instant" }); 
-                    }}
-                    className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
-                  >
-                    <IoMdAddCircle /> Add User
-                  </span>
-                  
+                      onClick={() => {
+                        setAddUserModal(true); // Open the modal
+                        setMenuOpen(false); // Close the mobile menu
+                        window.scrollTo({ top: 0, behavior: "instant" });
+                      }}
+                      className="cursor-pointer flex items-center gap-1 font-semibold text-sky-500"
+                    >
+                      <IoMdAddCircle /> Add User
+                    </span>
                   )}
 
                   {/* Search Bar */}
@@ -434,7 +437,7 @@ export const Home = (props) => {
                             key={user.user_id}
                             if
                             className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 hover:title = show user's lead rounded p-1"
-                            title="show user's lead"
+                            title="Click to show user's leads"
                             onClick={() => {
                               setSelectedUser(user); // ✅ Select user
                               setShowUsers(false); // ✅ Close dropdown
@@ -444,7 +447,19 @@ export const Home = (props) => {
                             <MdDelete
                               onClick={(e) => {
                                 e.stopPropagation(); // Prevents selecting the user when clicking delete
-                                deleteUser(user.user_id);
+                                if (
+                                  window.confirm(
+                                    "Are you sure you want to permanently delete this user?"
+                                  )
+                                ) {
+                                  if (leadNeedsReassignment(user.user_id)) {
+                                    alert(
+                                      "You need to reassign the lead first."
+                                    );
+                                  } else {
+                                    deleteUser(user.user_id);
+                                  }
+                                }
                               }}
                               className="cursor-pointer text-red-500 text-[15px] hover:text-red-700"
                               title="Delete User" // Shows tooltip on hover
