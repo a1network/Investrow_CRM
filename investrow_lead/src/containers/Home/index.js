@@ -168,7 +168,10 @@ export const Home = (props) => {
             </td>
             <td>
               <FaEdit
-                onClick={() => assignLead(lead.lead_id, _id)}
+                onClick={() => {
+                  assignLead(lead.lead_id, _id)
+                  window.scrollTo({ top: 0, behavior: "instant" });
+                }}
                 style={{
                   cursor: "pointer",
                   fontSize: "15px",
@@ -247,18 +250,24 @@ export const Home = (props) => {
             <td>{lead.action}</td>
             <td>{lead.user_name}</td>
             <td>
-              <FaEdit
-                onClick={() => assignLead(lead.lead_id, _id)}
-                style={{
-                  cursor: "pointer",
-                  fontSize: "15px",
-                  color: "skyblue",
-                }}
-              />
+            <FaEdit
+  onClick={() => {
+    window.scrollTo({ top: 0, behavior: "instant" }); // Scroll to the top
+    assignLead(lead.lead_id, _id); // Call the function properly
+  }}
+  style={{
+    cursor: "pointer",
+    fontSize: "15px",
+    color: "skyblue",
+  }}
+/>
+
             </td>
             <td>
               <MdDelete
-                onClick={() => deletelead(lead.lead_id)}
+                onClick={() => {deletelead(lead.lead_id)
+                
+                }}
                 style={{ cursor: "pointer", fontSize: "15px", color: "red" }}
               />
             </td>
