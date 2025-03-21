@@ -312,7 +312,18 @@ export const Home = (props) => {
     // Your logic to reassign the lead
     console.log("Reassigning lead with ID:", lead.lead_id);
   };
-
+  const handleDeleteUser = (user) => {
+    if (!user) return;
+  
+    if (window.confirm(`Are you sure you want to permanently Remove ${user.name}?`)) {
+      if (leadNeedsReassignment(user)) {
+        alert("You need to reassign the lead first.");
+      } else {
+        deleteUser(user.user_id);
+      }
+    }
+  };
+  
   const showUserFilteredLeads = selectedUser
     ? leads.filter((lead) => lead.user_id === selectedUser.user_id)
     : leads;
@@ -427,52 +438,38 @@ export const Home = (props) => {
                     </span>
                   )}
                   {showUsers && (
-                    <div
-                      ref={dropdownRef}
-                      className="absolute left-1/2 transform -translate-x-1/2 top-14 bg-white border border-gray-300 shadow-md p-2 rounded-lg max-h-32 overflow-auto w-48"
-                    >
-                      {users.length > 0 ? (
-                        users.map((user) => (
-                          <div
-                            key={user.user_id}
-                            if
-                            className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 hover:title = show user's lead rounded p-1"
-                            title="Click to show user's leads"
-                            onClick={() => {
-                              setSelectedUser(user); // ✅ Select user
-                              setShowUsers(false); // ✅ Close dropdown
-                            }}
-                          >
-                            <span>{user.name}</span>
-                            <MdDelete
-                              onClick={(e) => {
-                                e.stopPropagation(); // Prevents selecting the user when clicking delete
-                                if (
-                                  window.confirm(
-                                    "Are you sure you want to permanently delete this user?"
-                                  )
-                                ) {
-                                  if (leadNeedsReassignment(user.user_id)) {
-                                    alert(
-                                      "You need to reassign the lead first."
-                                    );
-                                  } else {
-                                    deleteUser(user.user_id);
-                                  }
-                                }
-                              }}
-                              className="cursor-pointer text-red-500 text-[15px] hover:text-red-700"
-                              title="Delete User" // Shows tooltip on hover
-                            />
-                          </div>
-                        ))
-                      ) : (
-                        <p className="text-gray-500 text-center">
-                          No users available
-                        </p>
-                      )}
-                    </div>
-                  )}
+  <div
+    ref={dropdownRef}
+    className="absolute left-1/2 transform -translate-x-1/2 top-14 bg-white border border-gray-300 shadow-md p-2 rounded-lg max-h-32 overflow-auto w-48"
+  >
+    {users.length > 0 ? (
+      users.map((user) => (
+        <div
+          key={user.user_id}
+          className="flex justify-between items-center text-gray-700 cursor-pointer hover:bg-gray-200 rounded p-1"
+          title="Click to show user's leads"
+          onClick={() => {
+            setSelectedUser(user); // ✅ Select user
+            setShowUsers(false); // ✅ Close dropdown
+          }}
+        >
+          <span>{user.name}</span>
+          <MdDelete
+            onClick={(e) => {
+              e.stopPropagation(); // Prevents selecting the user when clicking delete
+              handleDeleteUser(user);
+            }}
+            className="cursor-pointer text-red-500 text-[15px] hover:text-red-700"
+            title="Delete User"
+          />
+        </div>
+      ))
+    ) : (
+      <p className="text-gray-500 text-center">No users available</p>
+    )}
+  </div>
+)}
+
                 </div>
 
                 {/* Right - User Info and Logout (Always Visible) */}
