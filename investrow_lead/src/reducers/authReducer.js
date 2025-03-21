@@ -1,13 +1,15 @@
 import { authConstants } from "../actions/constants";
 
-// ✅ Load token & user from localStorage
-const token = localStorage.getItem("token");
-const user = JSON.parse(localStorage.getItem("user"));
-
 const initState = {
-  token: token || null,  // Load token from localStorage
-  user: user || { user_id: "", name: "", email: "", role: "", mob: "" }, // Load user data
-  authenticate: !!token, // If token exists, user is authenticated
+  token: null,
+  user: {
+    user_id: "",
+    name: "",
+    email: "",
+    role: "",
+    mob:""
+  },
+  authenticate: false,
   authenticating: false,
   loading: false,
   error: null,
@@ -15,61 +17,55 @@ const initState = {
 };
 
 export const authReducer = (state = initState, action) => {
+  // console.log(action);
   switch (action.type) {
     case authConstants.LOGIN_REQUEST:
-      return {
+      state = {
         ...state,
         authenticating: true,
       };
-
+      break;
+    default:
+      break;
     case authConstants.LOGIN_SUCCESS:
-      // ✅ Save token & user to localStorage
-      localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("user", JSON.stringify(action.payload.user));
-
-      return {
+      state = {
         ...state,
         user: action.payload.user,
         token: action.payload.token,
         authenticate: true,
         authenticating: false,
       };
-
+      break;
     case authConstants.LOGIN_FAILURE:
-      return {
+      state = {
         ...state,
         error: action.payload.error,
       };
-
+      break;
     case authConstants.LOGIN_PASS_ERROR:
-      return {
+      state = {
         ...state,
         message: action.payload.message,
       };
-
+      break;
     case authConstants.LOGOUT_REQUEST:
-      return {
+      state = {
         ...state,
         loading: true,
       };
-
+      break;
     case authConstants.LOGOUT_SUCCESS:
-      // ✅ Clear localStorage on logout
-      localStorage.removeItem("token");
-      localStorage.removeItem("user");
-
-      return {
+      state = {
         ...initState,
       };
-
+      break;
     case authConstants.LOGOUT_FAILURE:
-      return {
+      state = {
         ...state,
         error: action.payload.error,
         loading: false,
       };
-
-    default:
-      return state;
+      break;
   }
+  return state;
 };
